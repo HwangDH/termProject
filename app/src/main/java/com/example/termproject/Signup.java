@@ -9,8 +9,11 @@ import android.os.Bundle;
 //import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,62 +30,75 @@ import com.example.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.example.myapplication.DBConnect;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 import android.app.AlertDialog;
 
-import androidx.annotation.NonNull;
-
-import javax.xml.transform.Result;
-
-import static com.android.volley.VolleyLog.TAG;
-
 public class Signup extends Activity {
     AlertDialog alertdialog;
-    EditText userid, userpassword, username, userage;
-    TextView signup, already;
+    EditText userid, userpassword, username, userage, phonenumber;
+    Button signup, idcheck;
+    Spinner bank;
     int num=0;
     private boolean validate = false;
     String url = "https://scv0319.cafe24.com/man/register.php";
     String user_id, user_id2;
-    String token;
+    String text1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
+        setContentView(R.layout.activity_signup);
         userid= (EditText) findViewById(R.id.userid);
         userpassword= (EditText) findViewById(R.id.userpassword);
         username= (EditText) findViewById(R.id.username);
         userage= (EditText) findViewById(R.id.userage);
-        signup = (TextView) findViewById(R.id.signup);
-        already = (TextView) findViewById(R.id.already);
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
+        phonenumber=(EditText)findViewById(R.id.phonenumber);
+        idcheck = (Button) findViewById(R.id.idcheck);
+        signup = (Button) findViewById(R.id.signup);
 
-                        // Get new Instance ID token
-                        token = task.getResult().getToken();
+        final String[] data = getResources().getStringArray(R.array.bank);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, data);
+        Spinner bank = (Spinner) findViewById(R.id.bank);
+        bank.setAdapter(adapter);
 
-                        // Log and toast
-                        //String msg = getString(R.string.msg_token_fmt, token);
-                        //Log.d(TAG, msg);
-                        //Toast.makeText(Signup.this, token, Toast.LENGTH_SHORT).show();
-                        System.out.println(token);
-                    }
-                });
+        bank.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i ==0){
+                    text1 = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                    System.out.println(text1);
+                }
+                else if(i ==1){
+                    text1 = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==2){
+                    text1 = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==3){
+                    text1 = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==4){
+                    text1 = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==5){
+                    text1 = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
 
-        final Button id_check = (Button) findViewById(R.id.id_check);
+            }
 
-        id_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        idcheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 user_id= userid.getText().toString();
@@ -134,44 +150,15 @@ public class Signup extends Activity {
             }
         });
 
-        already.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertdialog = new AlertDialog.Builder(Signup.this).create();
-
-                alertdialog.setTitle("Already have id?");
-                alertdialog.setMessage("아이디를 가지고 계십니까?");
-                alertdialog.setCancelable(false);
-                alertdialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        alertdialog.dismiss();
-                    }
-                });
-
-                alertdialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //SharedPreferences.Editor editor = shared.edit();
-                        //editor.clear();
-                        //editor.commit();
-                        Intent intent = new Intent(Signup.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                alertdialog.show();
-            }
-        });
-
-
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sbank =text1;
                 String sid = userid.getText().toString();
                 String spassword = userpassword.getText().toString();
                 String sname = username.getText().toString();
                 String sage = userage.getText().toString();
-                String stoken = token;
+                String sphonenumber = phonenumber.getText().toString();
 
                 if(sid.isEmpty() ||spassword.isEmpty()||sname.isEmpty()||sage.isEmpty()){
                     Toast.makeText(Signup.this, "Fill all details", Toast.LENGTH_SHORT).show();
@@ -192,7 +179,7 @@ public class Signup extends Activity {
                     alertdialog.show();
                 }
                 else {
-                    signup(sid,spassword,sname,sage, stoken);
+                    signup(sbank, sid, spassword, sname, sage, sphonenumber);
                     SharedPreferences preferences = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
@@ -213,12 +200,12 @@ public class Signup extends Activity {
     }
 
     public void show(){
-        Intent intent = new Intent(Signup.this,dogRegister.class);
+        Intent intent = new Intent(Signup.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
-    public void signup(final String userid, final String userpassword,final String username, final String userage, final String token){
+    public void signup(final String bank, final String userid, final String userpassword,final String username, final String userage, final String phonenumber){
         RequestQueue requestQueue = Volley.newRequestQueue(Signup.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -235,11 +222,12 @@ public class Signup extends Activity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> stringMap = new HashMap<>();
+                stringMap.put("bank", bank);
                 stringMap.put("userid",userid);
                 stringMap.put("userpassword",userpassword);
                 stringMap.put("username",username);
                 stringMap.put("userage",userage);
-                stringMap.put( "token", token );
+                stringMap.put("phonenumber",phonenumber);
                 return stringMap;
             }
         };

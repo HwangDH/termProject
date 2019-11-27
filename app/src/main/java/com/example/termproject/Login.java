@@ -1,7 +1,9 @@
 package com.example.termproject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,11 +31,12 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class Login extends Activity {
     EditText userid, userpasswod;
-    Button login;
+    Button login, signup;
     CheckBox id_store, auto_login;
     String user_id, user_password;
     String token;
     SharedPreferences shared;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class Login extends Activity {
         login = (Button)findViewById(R.id.login);
         id_store = (CheckBox)findViewById(R.id.id_store);
         auto_login = (CheckBox)findViewById(R.id.auto_login);
-
+        signup = (Button)findViewById(R.id.signup);
 
         if(((CheckBox)auto_login).isChecked()){
             String userid2 = shared.getString("userid", "");
@@ -98,6 +101,32 @@ public class Login extends Activity {
                 else{
                     login(user_id, user_password);
                 }
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog = new AlertDialog.Builder(Login.this).create();
+
+                alertDialog.setTitle("회원가입");
+                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setCancelable(false);
+                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Login.this, Signup.class);
+                        startActivity(intent);
+                    }
+                });
+                alertDialog.show();
             }
         });
     }
