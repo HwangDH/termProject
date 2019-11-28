@@ -99,7 +99,6 @@ public class Signup extends Activity {
                     text1 = Integer.toString(i);
                     Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -126,7 +125,7 @@ public class Signup extends Activity {
                         @Override
                         public void onResponse(String response) {
                             try{
-                                //Toast.makeText(Signup.this, response, Toast.LENGTH_LONG).show();
+                                Toast.makeText(Signup.this, response, Toast.LENGTH_LONG).show();
                                 JSONObject jsonResponse = new JSONObject(response);
                                 boolean success = jsonResponse.getBoolean("success");
 
@@ -153,7 +152,8 @@ public class Signup extends Activity {
                             }
                         }
                     };
-                    ValidateRequest ValidateRequest = new ValidateRequest(user_id, responseListener);
+                    ValidateRequest ValidateRequest = new ValidateRequest(user_id, text1, responseListener);
+                    System.out.println(text1);
                     RequestQueue queue = Volley.newRequestQueue(Signup.this);
                     queue.add(ValidateRequest);
                 }

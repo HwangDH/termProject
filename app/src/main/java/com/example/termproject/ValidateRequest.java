@@ -11,12 +11,14 @@ import java.util.Map;
 
 
 public class ValidateRequest extends StringRequest {
-    final static private String URL = "https://scv0319.cafe24.com/man/id_check.php";
+    final static private String URL = "https://scv0319.cafe24.com/termProject/id_check.php";
     private Map<String, String> parameters;
-    public ValidateRequest(String userid, Response.Listener<String> listener){
+    public ValidateRequest(String userid, String bank, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);//해당 URL에 POST방식으로 파마미터들을 전송함
         parameters = new HashMap<>();
         parameters.put("userid", userid);
+        parameters.put("bank", bank);
+        System.out.println(bank+"as");
     }
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {

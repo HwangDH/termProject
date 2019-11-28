@@ -132,7 +132,7 @@ public class Login extends Activity {
     }
 
     public void login(final String user, final String pass){
-        String url = "https://scv0319.cafe24.com/man/login.php?userid="+user+"&userpassword="+pass+"";
+        String url = "https://scv0319.cafe24.com/termProject/login.php?userid="+user+"&userpassword="+pass+"";
         Log.i("Hiteshurl",""+url);
         RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
