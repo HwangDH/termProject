@@ -4,10 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.termproject.Adapter.DepositAdapter;
 
@@ -22,9 +29,10 @@ import java.net.URL;
 public class LoanProduct extends Activity {
     SharedPreferences shared;
     String myJSON;
-
+    Button Loan;
     private ListView listView;
     private DepositAdapter adapter;
+    String bankid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +41,58 @@ public class LoanProduct extends Activity {
         adapter = new DepositAdapter();
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
+        Loan = (Button)findViewById(R.id.loan);
         getData("https://scv0319.cafe24.com/termProject/loanProduct.php");
+        final String[] data = getResources().getStringArray(R.array.bank);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, data);
+        Spinner bank = (Spinner) findViewById(R.id.bank);
+        bank.setAdapter(adapter);
+
+        //스피너 클릭(은행 선택)
+        bank.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i ==0){
+                    bankid = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==1){
+                    bankid = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==2){
+                    bankid = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==3){
+                    bankid = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==4){
+                    bankid = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+                else if(i ==5){
+                    bankid = Integer.toString(i);
+                    Toast.makeText(getApplicationContext(), data[i], Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        Loan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = shared.edit();
+                editor.putString("bankid",bankid);
+                editor.commit();
+                Intent intent = new Intent(LoanProduct.this,LoanProduct2.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void showList(){

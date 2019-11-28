@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".InstallmentProduct"></activity>
+        <activity android:name=".LoanProduct2"></activity>
+        <activity android:name=".InstallmentProduct2" />
+        <activity android:name=".DepositProduct2" />
+        <activity android:name=".InstallmentProduct" />
         <activity android:name=".DepositProduct" />
         <activity android:name=".LoanProduct" />
         <activity android:name=".Signup" />

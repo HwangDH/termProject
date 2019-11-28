@@ -105,8 +105,8 @@ public class    MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
-                alertDialog.setTitle("회원가입");
-                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setTitle("예금상품");
+                alertDialog.setMessage("예금상품을 보시겠습니까?");
                 alertDialog.setCancelable(false);
                 alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -136,8 +136,8 @@ public class    MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
-                alertDialog.setTitle("회원가입");
-                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setTitle("적금상품");
+                alertDialog.setMessage("적금상품을 보시겠습니까?");
                 alertDialog.setCancelable(false);
                 alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -163,8 +163,8 @@ public class    MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
-                alertDialog.setTitle("회원가입");
-                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setTitle("대출상품");
+                alertDialog.setMessage("대출상품 보시겠습니까?");
                 alertDialog.setCancelable(false);
                 alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                     @Override
