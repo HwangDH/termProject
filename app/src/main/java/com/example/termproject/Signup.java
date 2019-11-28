@@ -1,10 +1,12 @@
 package com.example.termproject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -24,6 +26,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import com.example.*;
@@ -40,7 +49,7 @@ public class Signup extends Activity {
     Spinner bank;
     int num=0;
     private boolean validate = false;
-    String url = "https://scv0319.cafe24.com/man/register.php";
+    String url = "https://scv0319.cafe24.com/termProject/register.php";
     String user_id, user_id2;
     String text1;
 
@@ -48,6 +57,7 @@ public class Signup extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
         userid= (EditText) findViewById(R.id.userid);
         userpassword= (EditText) findViewById(R.id.userpassword);
         username= (EditText) findViewById(R.id.username);
@@ -215,6 +225,7 @@ public class Signup extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println("2");
                 Log.i("Hitesh",""+error);
                 Toast.makeText(Signup.this, ""+error, Toast.LENGTH_SHORT).show();
             }
@@ -222,6 +233,8 @@ public class Signup extends Activity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> stringMap = new HashMap<>();
+                System.out.println(bank);
+                System.out.println(userid);
                 stringMap.put("bank", bank);
                 stringMap.put("userid",userid);
                 stringMap.put("userpassword",userpassword);
@@ -231,7 +244,6 @@ public class Signup extends Activity {
                 return stringMap;
             }
         };
-
         requestQueue.add(stringRequest);
     }
 }

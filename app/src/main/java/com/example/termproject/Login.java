@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import static com.android.volley.VolleyLog.TAG;
 
 public class Login extends Activity {
-    EditText userid, userpasswod;
+    EditText userid1, userpassword1;
     Button login, signup;
     CheckBox id_store, auto_login;
     String user_id, user_password;
@@ -44,8 +44,8 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
 
         shared = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
-        userid = (EditText)findViewById(R.id.userid);
-        userpasswod =(EditText)findViewById(R.id.userpassword);
+        userid1 = (EditText)findViewById(R.id.userid1);
+        userpassword1 =(EditText)findViewById(R.id.userpassword1);
         login = (Button)findViewById(R.id.login);
         id_store = (CheckBox)findViewById(R.id.id_store);
         auto_login = (CheckBox)findViewById(R.id.auto_login);
@@ -61,7 +61,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 if(((CheckBox)v).isChecked()){
-                    user_id = userid.getText().toString();
+                    user_id = userid1.getText().toString();
                     SharedPreferences.Editor editor = shared.edit();
                     editor.clear();
                     editor.putString("userid", user_id);
@@ -74,8 +74,8 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 if(((CheckBox)v).isChecked()){
-                    user_id = userid.getText().toString();
-                    user_password = userpasswod.getText().toString();
+                    user_id = userid1.getText().toString();
+                    user_password = userpassword1.getText().toString();
 
                     SharedPreferences.Editor editor = shared.edit();
                     editor.clear();
@@ -89,8 +89,8 @@ public class Login extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user_id = userid.getText().toString();
-                user_password = userpasswod.getText().toString();
+                user_id = userid1.getText().toString();
+                user_password = userpassword1.getText().toString();
 
                 if(user_id.isEmpty()){
                     Toast.makeText(Login.this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -131,8 +131,9 @@ public class Login extends Activity {
         });
     }
 
-    public void login(String user_id, String user_password){
-        String url = "https://scv0319.cafe24.com/man/login.php?userid="+user_id+"&userpassword="+user_password+"";
+    public void login(final String user, final String pass){
+        String url = "https://scv0319.cafe24.com/man/login.php?userid="+user+"&userpassword="+pass+"";
+        Log.i("Hiteshurl",""+url);
         RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -141,21 +142,18 @@ public class Login extends Activity {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
                     JSONObject jsonObject1 = jsonArray.getJSONObject(0);
-
                     String userid2 = jsonObject1.getString("userid");
                     String userpassword2 = jsonObject1.getString("userpassword");
-                    SharedPreferences shared = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
+                    SharedPreferences shared = getSharedPreferences("Mypref",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = shared.edit();
                     editor.putString("userid",userid2);
                     editor.putString("userpassword",userpassword2);
                     editor.commit();
-
                     Intent intent = new Intent(Login.this,MainActivity.class);
                     startActivity(intent);
-
                 }
                 catch (JSONException e) {
-                    Toast.makeText(Login.this, "아이디와 비밀번호를 정확하게 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
@@ -165,11 +163,6 @@ public class Login extends Activity {
             }
         });
         requestQueue.add(stringRequest);
-    }
-
-    @Override
-    public void onBackPressed(){
-
     }
 
 }

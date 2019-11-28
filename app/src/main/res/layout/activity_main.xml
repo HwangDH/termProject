@@ -1,18 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/lines"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/mypage"
+            android:background="@drawable/round_corner"
+            android:paddingTop="3dp"
+            android:layout_marginLeft="16dip"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="마이페이지"
+            android:textColor="#d9e5f3"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="19dp"/>
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"
+            android:paddingTop="3dp"
+            android:text="계좌조회"
+            android:background="@drawable/round_corner"
+            android:textColor="#d9e5f3"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="19dp" />
+
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dip"
+            android:paddingTop="3dp"
+            android:text="로그아웃"
+            android:background="@drawable/round_corner"
+            android:textColor="#d9e5f3"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="19dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:layout_below="@+id/lines">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
+            android:src="@drawable/login_background"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_below="@+id/line">
+
+        <LinearLayout
+            android:id="@+id/line0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <Spinner
+                android:id="@+id/bank"
+                android:entries="@array/bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@id/line0">
+
+            <Button
+                android:id="@+id/deposit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#353535"
+                android:text="예금상품보기"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#353535"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="16dp"
+                android:letterSpacing="0.2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/line1">
+
+            <Button
+                android:id="@+id/installment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#353535"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:padding="16dp"
+                android:text="적금상품보기"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#353535"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/line2">
+
+            <Button
+                android:id="@+id/loan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#353535"
+                android:text="대출상품보기"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#353535"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="16dp"
+                android:letterSpacing="0.2"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
