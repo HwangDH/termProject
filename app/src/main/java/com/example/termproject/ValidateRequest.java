@@ -18,7 +18,6 @@ public class ValidateRequest extends StringRequest {
         parameters = new HashMap<>();
         parameters.put("userid", userid);
         parameters.put("bank", bank);
-        System.out.println(bank+"as");
     }
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {

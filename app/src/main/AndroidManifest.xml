@@ -9,13 +9,16 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Signup"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".InstallmentProduct"></activity>
+        <activity android:name=".DepositProduct" />
+        <activity android:name=".LoanProduct" />
+        <activity android:name=".Signup" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">

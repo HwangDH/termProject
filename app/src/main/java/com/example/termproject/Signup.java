@@ -153,7 +153,6 @@ public class Signup extends Activity {
                         }
                     };
                     ValidateRequest ValidateRequest = new ValidateRequest(user_id, text1, responseListener);
-                    System.out.println(text1);
                     RequestQueue queue = Volley.newRequestQueue(Signup.this);
                     queue.add(ValidateRequest);
                 }

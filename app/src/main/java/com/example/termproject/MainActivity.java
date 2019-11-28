@@ -2,7 +2,11 @@ package com.example.termproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,9 +16,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class    MainActivity extends AppCompatActivity {
-
+    SharedPreferences shared;
     Button logout, search, mypage, deposit, installment, loan;
     String text1;
+    AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +103,30 @@ public class    MainActivity extends AppCompatActivity {
         deposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
+                alertDialog.setTitle("회원가입");
+                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setCancelable(false);
+                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences shared = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = shared.edit();
+                        editor.putString("bank",text1);
+                        editor.commit();
+                        Intent intent = new Intent(MainActivity.this, DepositProduct.class);
+                        startActivity(intent);
+                    }
+                });
+                alertDialog.show();
             }
         });
 
@@ -105,7 +134,26 @@ public class    MainActivity extends AppCompatActivity {
         installment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
+                alertDialog.setTitle("회원가입");
+                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setCancelable(false);
+                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this, InstallmentProduct.class);
+                        startActivity(intent);
+                    }
+                });
+                alertDialog.show();
             }
         });
 
@@ -113,8 +161,32 @@ public class    MainActivity extends AppCompatActivity {
         loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
+                alertDialog.setTitle("회원가입");
+                alertDialog.setMessage("회원가입 하시겠습니까?");
+                alertDialog.setCancelable(false);
+                alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this, LoanProduct.class);
+                        startActivity(intent);
+                    }
+                });
+                alertDialog.show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 }
