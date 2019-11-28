@@ -42,7 +42,7 @@ public class LoanProduct extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         Loan = (Button)findViewById(R.id.loan);
-        getData("https://scv0319.cafe24.com/termProject/loanProduct.php");
+        getData("https://192.168.224.3/loanProduct.php");
         final String[] data = getResources().getStringArray(R.array.bank);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, data);
         Spinner bank = (Spinner) findViewById(R.id.bank);

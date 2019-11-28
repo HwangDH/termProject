@@ -28,7 +28,7 @@ public class DepositProduct2 extends AppCompatActivity {
         shared = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
         bankid = shared.getString("bankid","");
         System.out.println(bankid);
-        getData("https://scv0319.cafe24.com/termProject/depositProduct2.php?bankid="+bankid+"");
+        getData("https://192.168.224.3/depositProduct2.php?bankid="+bankid+"");
     }
 
     public void showList(){

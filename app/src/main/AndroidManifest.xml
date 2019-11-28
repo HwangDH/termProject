@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoanProduct2"></activity>
+        <activity android:name=".Banker_Main"></activity>
+        <activity android:name=".LoanProduct2" />
         <activity android:name=".InstallmentProduct2" />
         <activity android:name=".DepositProduct2" />
         <activity android:name=".InstallmentProduct" />

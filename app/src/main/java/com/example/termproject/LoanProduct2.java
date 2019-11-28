@@ -25,7 +25,7 @@ public class LoanProduct2 extends AppCompatActivity {
         setContentView(R.layout.activity_loan_product2);
         shared = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
         bankid = shared.getString("bankid","");
-        getData("https://scv0319.cafe24.com/termProject/loanProduct2.php?bankid="+bankid+"");
+        getData("https://192.168.224.3/loanProduct2.php?bankid="+bankid+"");
     }
     public void showList(){
         try{

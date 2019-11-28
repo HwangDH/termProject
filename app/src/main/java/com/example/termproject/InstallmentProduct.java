@@ -42,7 +42,7 @@ public class InstallmentProduct extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         Installment = (Button)findViewById(R.id.installment);
-        getData("https://scv0319.cafe24.com/termProject/installmentProduct.php");
+        getData("https://192.168.224.3/installmentProduct.php");
         final String[] data = getResources().getStringArray(R.array.bank);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, data);
         Spinner bank = (Spinner) findViewById(R.id.bank);

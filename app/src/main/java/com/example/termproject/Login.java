@@ -37,7 +37,7 @@ public class Login extends Activity {
     String token;
     SharedPreferences shared;
     AlertDialog alertDialog;
-
+    boolean check1=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,40 +48,13 @@ public class Login extends Activity {
         userpassword1 =(EditText)findViewById(R.id.userpassword1);
         login = (Button)findViewById(R.id.login);
         id_store = (CheckBox)findViewById(R.id.id_store);
-        auto_login = (CheckBox)findViewById(R.id.auto_login);
         signup = (Button)findViewById(R.id.signup);
-
-        if(((CheckBox)auto_login).isChecked()){
-            String userid2 = shared.getString("userid", "");
-            String userpassword2 = shared.getString("userpassword", "");
-            login(userid2, userpassword2);
-        }
 
         id_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(((CheckBox)v).isChecked()){
-                    user_id = userid1.getText().toString();
-                    SharedPreferences.Editor editor = shared.edit();
-                    editor.clear();
-                    editor.putString("userid", user_id);
-                    editor.commit();
-                }
-            }
-        });
-
-        auto_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(((CheckBox)v).isChecked()){
-                    user_id = userid1.getText().toString();
-                    user_password = userpassword1.getText().toString();
-
-                    SharedPreferences.Editor editor = shared.edit();
-                    editor.clear();
-                    editor.putString("userid", user_id);
-                    editor.putString("userpassword", user_password);
-                    editor.commit();
+                if(((CheckBox)v).isChecked()) {
+                    check1 = true;
                 }
             }
         });
@@ -132,7 +105,7 @@ public class Login extends Activity {
     }
 
     public void login(final String user, final String pass){
-        String url = "https://scv0319.cafe24.com/termProject/login.php?userid="+user+"&userpassword="+pass+"";
+        String url = "https://192.168.224.3/login.php?userid="+user+"&userpassword="+pass+"";
         Log.i("Hiteshurl",""+url);
         RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -149,8 +122,14 @@ public class Login extends Activity {
                     editor.putString("userid",userid2);
                     editor.putString("userpassword",userpassword2);
                     editor.commit();
-                    Intent intent = new Intent(Login.this,MainActivity.class);
-                    startActivity(intent);
+                    if(check1){
+                        Intent intent = new Intent(Login.this,Banker_Main.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(Login.this,MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

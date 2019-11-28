@@ -49,7 +49,7 @@ public class Signup extends Activity {
     Spinner bank;
     int num=0;
     private boolean validate = false;
-    String url = "https://scv0319.cafe24.com/termProject/register.php";
+    String url = "https://192.168.224.3/register.php";
     String user_id, user_id2;
     String text1;
 

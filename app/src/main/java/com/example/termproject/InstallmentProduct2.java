@@ -26,7 +26,7 @@ public class InstallmentProduct2 extends AppCompatActivity {
 
         shared = getSharedPreferences("Mypref", Context.MODE_PRIVATE);
         bankid = shared.getString("bankid","");
-        getData("https://scv0319.cafe24.com/termProject/installmentProduct2.php?bankid="+bankid+"");
+        getData("https://192.168.224.3/installmentProduct2.php?bankid="+bankid+"");
     }
 
     public void showList(){
